@@ -1,10 +1,71 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div id="nav" class="bg-gray-300 text-xl">
+    <h1 class="text-2xl font-black py-5">Social Network 5.0</h1>
+
+    <div class="flex justify-around md:px-60">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link> |
+      <router-link to="/login">Login</router-link> |
+      <router-link to="/register">Register</router-link> |
+      <router-link to="/secret">Secret</router-link>
+    </div>
+
+    <div v-if="isLogged">
+      <div class="text-right">
+        {{ this.eMail }}
+        <button @click="signOut" class="text-red-700">sign out</button>
+      </div>
+    </div>
+    <div v-else class="text-right">not logged in</div>
+    {{ error }}
   </div>
-  <router-view/>
+
+  <router-view />
 </template>
+
+
+<script>
+import firebase from "firebase/app";
+import "firebase/auth";
+
+export default {
+  setup() {
+    //return { uid: useState() };
+  },
+  data() {
+    return {
+      eMail: "not logged in",
+      isLogged: false,
+      error: "",
+    };
+  },
+  mounted() {
+    this.setFirebase();
+  },
+  methods: {
+    signOut() {
+      firebase.auth().signOut();
+      this.$router.replace({ name: "login" });
+    },
+    setFirebase() {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          // User is signed in.
+          console.log("signed in");
+          console.log("USER IS", user);
+          this.isLogged = true;
+          this.eMail = user.email;
+        } else {
+          // No user is signed in.
+          this.isLogged = false;
+          console.log("signed out", this.isLogged);
+        }
+      });
+    },
+  },
+};
+</script>
+
 
 <style>
 #app {
@@ -13,10 +74,6 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
 }
 
 #nav a {
