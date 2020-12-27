@@ -50,6 +50,10 @@ export default {
       firebase
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
+        .then((data) => {
+          console.log(data);
+          this.$router.replace({ name: "secret" });
+        })
         .catch((err) => {
           this.error = err;
         });
@@ -59,17 +63,9 @@ export default {
       firebase
         .auth()
         .signInWithRedirect(provider)
-        .then(function (result) {
-          // This gives you a Google Access Token. You can use it to access the Google API.
-          const token = result.credential.accessToken;
-          console.log(token);
-          // The signed-in user info.
-          const user = result.user;
-          console.log(user);
-          // ...
-        })
         .catch(function (error) {
-          this.error = error.message;
+          console.log(error.message);
+          console.log('somethings with auth..')
         });
     },
   },
