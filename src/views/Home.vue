@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    This is the main page
+    Это совершенно новая социальная сеть новейшего поколения
   </div>
 </template>
 

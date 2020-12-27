@@ -1,19 +1,19 @@
 <template>
   <div id="nav" class="bg-gray-300 text-xl">
-    <h1 class="text-2xl font-black py-5">Social Network 5.0</h1>
+    <h1 class="text-2xl font-black pt-5">Социальная сеть 5.0</h1>
+    <h2 class="pb-5 text-sm">Я уже сбился со счета какая</h2>
 
     <div class="flex justify-around md:px-60">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/register">Register</router-link> |
-      <router-link to="/secret">Secret</router-link>
+      <router-link to="/">О Сайте</router-link> |
+      <router-link to="/login">Войти</router-link> |
+      <router-link to="/register">Регистрация</router-link> |
+      <router-link v-if="isLogged" to="/secret">ЧАТ</router-link>
     </div>
 
     <div v-if="isLogged">
       <div class="text-right">
         {{ this.eMail }}
-        <button @click="signOut" class="text-red-700">sign out</button>
+        <button @click="signOut" class="text-red-700">выйти</button>
       </div>
     </div>
     <div v-else class="text-right">not logged in</div>
@@ -39,7 +39,7 @@ export default {
       error: "",
     };
   },
-  mounted() {
+  mounted() { 
     this.setFirebase();
   },
   methods: {
