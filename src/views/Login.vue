@@ -50,10 +50,6 @@ export default {
       firebase
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
-        .then((data) => {
-          console.log(data);
-          this.$router.replace({ name: "secret" });
-        })
         .catch((err) => {
           this.error = err;
         });
