@@ -1,7 +1,7 @@
 <template>
   <div id="nav" class="bg-gray-300 text-xl">
     <h1 class="text-2xl font-black pt-5">Социальная сеть 5.0</h1>
-    <h2 class="pb-5 text-sm">Я уже сбился со счета какая</h2>
+    <h2 class="pb-5 text-sm">Я изучаю firebase</h2>
 
     <div class="flex justify-around md:px-60">
       <router-link to="/">О Сайте</router-link> |
